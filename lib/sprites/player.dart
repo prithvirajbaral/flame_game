@@ -1,15 +1,17 @@
 import 'dart:async';
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_game/constants.dart';
 import 'package:flame_game/game/go_green_game.dart';
 
-class Player extends SpriteComponent with HasGameRef<GoGreenGame> {
+class Player extends SpriteComponent with HasGameRef<GoGreenGame> ,CollisionCallbacks {
   @override
   FutureOr<void> onLoad() async {
     sprite = await Sprite.load("closed.png");
     position = Vector2(0, -(gameHeight / 2) + (size.y / 2));
     size = Vector2.all(150);
     anchor = Anchor.center;
+    add(RectangleHitbox());
   }
 
   @override
